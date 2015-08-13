@@ -1,0 +1,6 @@
+name: Minigames-Extras
+version: ${project.version}
+
+main: au.com.addstar.minigames.extras.MainPlugin
+
+author: Schmoller
