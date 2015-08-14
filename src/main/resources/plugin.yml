@@ -4,3 +4,7 @@ version: ${project.version}
 main: au.com.addstar.minigames.extras.MainPlugin
 
 author: Schmoller
+
+depend: [Minigames, Minigames-Regions]
+
+softdepend: [LibsDisguises]
