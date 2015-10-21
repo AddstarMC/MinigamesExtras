@@ -1,17 +1,11 @@
 package au.com.addstar.minigames.extras.disguises;
 
-import java.util.Arrays;
-
-import me.libraryaddict.disguise.DisguiseAPI;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.PlayerLoadout;
-import au.com.mineauz.minigames.menu.Callback;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
 import au.com.mineauz.minigames.minigame.modules.LoadoutModule.LoadoutAddon;
