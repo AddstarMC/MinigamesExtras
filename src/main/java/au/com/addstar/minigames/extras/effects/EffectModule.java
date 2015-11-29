@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemAddEffect;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemEffect;
 import au.com.addstar.monolith.effects.BaseEffect;
+import au.com.addstar.monolith.effects.emitters.ContinuousEmitter;
 import au.com.addstar.monolith.effects.emitters.Emitter;
 import au.com.addstar.monolith.effects.emitters.EmitterManager;
 import au.com.mineauz.minigames.Minigames;
@@ -32,6 +33,7 @@ import au.com.mineauz.minigames.menu.MenuItemBack;
 import au.com.mineauz.minigames.minigame.Minigame;
 import au.com.mineauz.minigames.minigame.MinigameState;
 import au.com.mineauz.minigames.minigame.modules.MinigameModule;
+import au.com.mineauz.minigamesregions.Node;
 
 public class EffectModule extends MinigameModule {
 	private static final String NAME = "EFFECTS";
@@ -41,10 +43,13 @@ public class EffectModule extends MinigameModule {
 	private final Set<Emitter> sessionEmitters;
 	private final SetMultimap<Player, Emitter> playerEmitters;
 	
+	private final Map<Node, Emitter> nodeEmitters;
+	
 	public EffectModule(Minigame mgm) {
 		super(mgm);
 		
 		effects = Maps.newHashMap();
+		nodeEmitters = Maps.newIdentityHashMap();
 		sessionEmitters = Sets.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
 		playerEmitters = Multimaps.newSetMultimap(Maps.<Player, Collection<Emitter>>newHashMap(), new Supplier<Set<Emitter>>() {
 			@Override
@@ -89,7 +94,9 @@ public class EffectModule extends MinigameModule {
 		Preconditions.checkNotNull(emitter);
 		Preconditions.checkState(getMinigame().getState() != MinigameState.IDLE);
 		
-		sessionEmitters.add(emitter);
+		if (emitter instanceof ContinuousEmitter) {
+			sessionEmitters.add(emitter);
+		}
 		Effects.getEmitters().addEmitter(emitter);
 	}
 	
@@ -103,10 +110,33 @@ public class EffectModule extends MinigameModule {
 		Preconditions.checkNotNull(owner);
 		Preconditions.checkState(getMinigame().getState() != MinigameState.IDLE);
 		
-		sessionEmitters.add(emitter);
-		playerEmitters.put(owner, emitter);
+		if (emitter instanceof ContinuousEmitter) {
+			sessionEmitters.add(emitter);
+			playerEmitters.put(owner, emitter);
+		}
 		
 		Effects.getEmitters().addEmitter(emitter);
+	}
+	
+	/**
+	 * Sets the emitter tied to a node. This is just for reference. 
+	 * You must still register the emitter with {@link #addEmitter(Emitter)} 
+	 * or {@link #addEffect(String, BaseEffect)}.
+	 * If there is an existing emitter, it will be unregistered
+	 * @param node The node to set emitter on
+	 * @param emitter The emitter to set
+	 */
+	public void setNodeEmitter(Node node, Emitter emitter) {
+		Emitter existing = nodeEmitters.put(node, emitter);
+		if (existing != null) {
+			existing.stop();
+			sessionEmitters.remove(existing);
+			Effects.getEmitters().removeEmitter(existing);
+		}
+	}
+	
+	public Emitter getNodeEmitter(Node node) {
+		return nodeEmitters.get(node);
 	}
 	
 	/**
@@ -129,6 +159,7 @@ public class EffectModule extends MinigameModule {
 		for (Emitter emitter : sessionEmitters) {
 			Effects.getEmitters().removeEmitter(emitter);
 		}
+		nodeEmitters.clear();
 		sessionEmitters.clear();
 	}
 
