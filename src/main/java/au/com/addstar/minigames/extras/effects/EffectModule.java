@@ -1,25 +1,36 @@
 package au.com.addstar.minigames.extras.effects;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 
 import au.com.addstar.minigames.extras.effects.menu.MenuItemAddEffect;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemEffect;
 import au.com.addstar.monolith.effects.BaseEffect;
+import au.com.addstar.monolith.effects.emitters.Emitter;
+import au.com.addstar.monolith.effects.emitters.EmitterManager;
+import au.com.mineauz.minigames.Minigames;
 import au.com.mineauz.minigames.config.Flag;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
 import au.com.mineauz.minigames.menu.MenuItemBack;
 import au.com.mineauz.minigames.minigame.Minigame;
+import au.com.mineauz.minigames.minigame.MinigameState;
 import au.com.mineauz.minigames.minigame.modules.MinigameModule;
 
 public class EffectModule extends MinigameModule {
@@ -27,10 +38,20 @@ public class EffectModule extends MinigameModule {
 	
 	private final Map<String, BaseEffect> effects;
 	
+	private final Set<Emitter> sessionEmitters;
+	private final SetMultimap<Player, Emitter> playerEmitters;
+	
 	public EffectModule(Minigame mgm) {
 		super(mgm);
 		
 		effects = Maps.newHashMap();
+		sessionEmitters = Sets.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
+		playerEmitters = Multimaps.newSetMultimap(Maps.<Player, Collection<Emitter>>newHashMap(), new Supplier<Set<Emitter>>() {
+			@Override
+			public Set<Emitter> get() {
+				return Sets.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
+			}
+		});
 	}
 
 	@Override
@@ -58,6 +79,57 @@ public class EffectModule extends MinigameModule {
 	
 	public Map<String, BaseEffect> getEffects() {
 		return Collections.unmodifiableMap(effects);
+	}
+	
+	/**
+	 * Registers a new emitter with this minigame. The minigame must have players in it
+	 * @param emitter The emitter to add
+	 */
+	public void addEmitter(Emitter emitter) {
+		Preconditions.checkNotNull(emitter);
+		Preconditions.checkState(getMinigame().getState() != MinigameState.IDLE);
+		
+		sessionEmitters.add(emitter);
+		Effects.getEmitters().addEmitter(emitter);
+	}
+	
+	/**
+	 * Registers a new emitter with this minigame belonging to a player. The minigame must have players in it
+	 * @param emitter The emitter to add
+	 * @param owner The owner of the emitter
+	 */
+	public void addEmitter(Emitter emitter, Player owner) {
+		Preconditions.checkNotNull(emitter);
+		Preconditions.checkNotNull(owner);
+		Preconditions.checkState(getMinigame().getState() != MinigameState.IDLE);
+		
+		sessionEmitters.add(emitter);
+		playerEmitters.put(owner, emitter);
+		
+		Effects.getEmitters().addEmitter(emitter);
+	}
+	
+	/**
+	 * Removes all emitters owned by a player
+	 * @param player The player that owns them
+	 */
+	public void removeEmitters(Player player) {
+		Set<Emitter> emitters = playerEmitters.removeAll(player);
+		sessionEmitters.removeAll(emitters);
+		for (Emitter emitter : emitters) {
+			Effects.getEmitters().removeEmitter(emitter);
+		}
+	}
+	
+	/**
+	 * Removes all emitters
+	 */
+	public void removeAllEmitters() {
+		playerEmitters.clear();
+		for (Emitter emitter : sessionEmitters) {
+			Effects.getEmitters().removeEmitter(emitter);
+		}
+		sessionEmitters.clear();
 	}
 
 	@Override

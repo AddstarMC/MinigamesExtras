@@ -1,11 +1,16 @@
 package au.com.addstar.minigames.extras.effects;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import au.com.addstar.minigames.extras.effects.menu.MenuItemParticleType;
+import au.com.addstar.minigames.extras.effects.menu.MenuItemVector;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.EffectParticle;
 import au.com.mineauz.minigames.menu.Callback;
 import au.com.mineauz.minigames.menu.Menu;
+import au.com.mineauz.minigames.menu.MenuItem;
 import au.com.mineauz.minigames.menu.MenuItemBack;
 import au.com.mineauz.minigames.menu.MenuItemDecimal;
 import au.com.mineauz.minigames.menu.MenuItemInteger;
@@ -27,7 +32,7 @@ public final class EffectMenus {
 		// Set the type
 		menu.addItem(new MenuItemParticleType("Set Type", Material.PAPER, effect));
 		
-		// TODO: Offset edit
+		menu.addItem(new MenuItemVector("Range", Material.FENCE, effect.getRange(), 0.1f));
 		menu.addItem(new MenuItemDecimal("Speed", Material.MINECART, new Callback<Double>() {
 			@Override
 			public void setValue(Double value) {
@@ -53,6 +58,24 @@ public final class EffectMenus {
 		}, 1, null));
 		
 		// TODO: Color edit
+		
+		menu.addItem(new MenuItemBack(parent), menu.getSize() - 9);
+		return menu;
+	}
+	
+	public static Menu selectEffect(final Menu parent, EffectModule module, final Callback<String> callback) {
+		Menu menu = new Menu(6, "Select Effect", parent.getViewer());
+		
+		for (final String key : module.getEffects().keySet()) {
+			menu.addItem(new MenuItem(WordUtils.capitalizeFully(key), Material.FIREWORK_CHARGE) {
+				@Override
+				public ItemStack onClick() {
+					callback.setValue(key);
+					parent.displayMenu(parent.getViewer());
+					return null;
+				}
+			});
+		}
 		
 		menu.addItem(new MenuItemBack(parent), menu.getSize() - 9);
 		return menu;
