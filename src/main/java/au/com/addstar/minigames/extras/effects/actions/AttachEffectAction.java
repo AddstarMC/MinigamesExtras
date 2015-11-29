@@ -17,6 +17,7 @@ import au.com.addstar.monolith.attachments.EntityAttachment;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.emitters.Emitter;
 import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.MinigameUtils;
 import au.com.mineauz.minigames.menu.Callback;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
@@ -31,10 +32,12 @@ public class AttachEffectAction extends ActionInterface {
 	private EmitterTemplate template;
 	private Vector attachmentOffset;
 	private boolean relativeToLook; 
+	private boolean isPrivate;
 	
 	public AttachEffectAction() {
 		template = new EmitterTemplate();
 		attachmentOffset = new Vector();
+		isPrivate = false;
 	}
 	
 	@Override
@@ -49,7 +52,11 @@ public class AttachEffectAction extends ActionInterface {
 
 	@Override
 	public void describe(Map<String, Object> out) {
-		
+		out.put("Effect", template.getEffect());
+		out.put("Type", template.getType());
+		out.put("Private", isPrivate);
+		out.put("Offset", String.format("%.1f,%.1f,%.1f", attachmentOffset.getX(), attachmentOffset.getY(), attachmentOffset.getZ()));
+		out.put("Relative", relativeToLook);
 	}
 
 	@Override
@@ -97,6 +104,11 @@ public class AttachEffectAction extends ActionInterface {
 		
 		Emitter emitter = template.create(attachment);
 		emitter.setEffect(effect);
+		
+		if (isPrivate) {
+			emitter.getViewers().add(player.getPlayer());
+		}
+		
 		module.addEmitter(emitter, player.getPlayer());
 		
 		// Play the effect
@@ -108,6 +120,7 @@ public class AttachEffectAction extends ActionInterface {
 		ConfigurationSection section = config.createSection(path);
 		section.set("offset", attachmentOffset);
 		section.set("lookrel", relativeToLook);
+		section.set("private", isPrivate);
 		template.save(section.createSection("template"));
 	}
 
@@ -120,6 +133,7 @@ public class AttachEffectAction extends ActionInterface {
 		
 		attachmentOffset = section.getVector("offset", new Vector());
 		relativeToLook = section.getBoolean("lookrel", false);
+		isPrivate = section.getBoolean("isPrivate", false);
 		if (section.isConfigurationSection("template")) {
 			template.load(section.getConfigurationSection("template"));
 		}
@@ -136,6 +150,18 @@ public class AttachEffectAction extends ActionInterface {
 				return null;
 			}
 		});
+		
+		menu.addItem(new MenuItemBoolean("Private Viewing", MinigameUtils.stringToList("NOTE: Some effect types may;not support private viewing"), Material.LEVER, new Callback<Boolean>() {
+			@Override
+			public void setValue(Boolean value) {
+				isPrivate = value;
+			}
+			
+			@Override
+			public Boolean getValue() {
+				return isPrivate;
+			}
+		}));
 		
 		menu.addItem(new MenuItemNewLine());
 		menu.addItem(new MenuItemVector("Attachment Offset", Material.DIODE, attachmentOffset, 0.1f));

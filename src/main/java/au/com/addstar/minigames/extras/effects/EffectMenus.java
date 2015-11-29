@@ -1,9 +1,11 @@
 package au.com.addstar.minigames.extras.effects;
 
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import au.com.addstar.minigames.extras.effects.menu.MenuItemColor;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemParticleType;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemVector;
 import au.com.addstar.monolith.effects.BaseEffect;
@@ -57,7 +59,17 @@ public final class EffectMenus {
 			}
 		}, 1, null));
 		
-		// TODO: Color edit
+		menu.addItem(new MenuItemColor("Particle Color", Material.INK_SACK, new Callback<Color>() {
+			@Override
+			public void setValue(Color value) {
+				effect.setColour(value);
+			}
+			
+			@Override
+			public Color getValue() {
+				return effect.getColour();
+			}
+		}));
 		
 		menu.addItem(new MenuItemBack(parent), menu.getSize() - 9);
 		return menu;
