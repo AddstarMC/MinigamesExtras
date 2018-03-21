@@ -21,6 +21,10 @@ class DisguiseSettings {
 	
 	private EnumFlag<ShowSetting> showDisguiseSelf;
 	
+
+	
+	private EnumFlag<ShowSetting> showDisguiseTeam;
+ 
 	private BooleanFlag showPlayerName;
 	
 	public DisguiseSettings() {
@@ -29,7 +33,8 @@ class DisguiseSettings {
 		showPlayerName = new BooleanFlag(true, "");
 		
 		// Default values
-		showDisguiseSelf = new EnumFlag<ShowSetting>(ShowSetting.Hide, "");
+		showDisguiseSelf = new EnumFlag<ShowSetting>(ShowSetting.Hide, "Show Disguise Self");
+		showDisguiseTeam = new EnumFlag<ShowSetting>(ShowSetting.Hide, "Show Team Disguise");
 	}
 	
 	// Primary disguise
@@ -68,6 +73,19 @@ class DisguiseSettings {
 		showDisguiseSelf.setFlag(show);
 	}
 	
+	public ShowSetting getShowDisguiseTeam() {
+		return showDisguiseTeam.getFlag();
+	}
+	
+	public void setShowDisguiseTeam(ShowSetting setting) {
+		Preconditions.checkNotNull(setting);
+		this.showDisguiseTeam.setFlag(setting);
+	}
+	
+	public Callback<ShowSetting> getShowDisguiseTeamCallback(){
+		return showDisguiseTeam.getCallback();
+	}
+	
 	public Callback<ShowSetting> getShowDisguiseSelfCallback() {
 		return showDisguiseSelf.getCallback();
 	}
@@ -96,13 +114,11 @@ class DisguiseSettings {
 		Disguise secondary = null;
 		if (alternate.getFlag() != null) {
 			secondary = alternate.getFlag().createDisguise();
-			secondary.setKeepDisguiseOnPlayerLogout(false);
 			secondary.setHideArmorFromSelf(false);
 			secondary.setHideHeldItemFromSelf(false);
 			showDisguiseName(player.getPlayer(), secondary, getShowPlayerName());
 		}
 		
-		primary.setKeepDisguiseOnPlayerLogout(false);
 		primary.setHideArmorFromSelf(false);
 		primary.setHideHeldItemFromSelf(false);
 		showDisguiseName(player.getPlayer(), primary, getShowPlayerName());
@@ -140,8 +156,8 @@ class DisguiseSettings {
 		
 		if (show) {
             if (disguise.getWatcher() instanceof LivingWatcher) {
-                ((LivingWatcher) disguise.getWatcher()).setCustomName(player.getDisplayName());
-                ((LivingWatcher) disguise.getWatcher()).setCustomNameVisible(true);
+                disguise.getWatcher().setCustomName(player.getDisplayName());
+                disguise.getWatcher().setCustomNameVisible(true);
             }
         }
 	}
@@ -154,6 +170,10 @@ class DisguiseSettings {
 		if (!showDisguiseSelf.getFlag().equals(showDisguiseSelf.getDefaultFlag())) {
 			section.set("show-self", showDisguiseSelf.getFlag().name());
 		}
+  
+		if (!showDisguiseTeam.getFlag().equals(showDisguiseTeam.getDefaultFlag())) {
+            section.set("show-team", showDisguiseTeam.getFlag().name());
+        }
 		
 		if (showPlayerName.getFlag() != showPlayerName.getDefaultFlag()) {
 			section.set("show-name", showPlayerName.getFlag());
@@ -172,6 +192,10 @@ class DisguiseSettings {
 		if (section.contains("show-self")) {
 			showDisguiseSelf.setFlag(ShowSetting.valueOf(section.getString("show-self")));
 		}
+        
+        if (section.contains("show-team")) {
+            showDisguiseTeam.setFlag(ShowSetting.valueOf(section.getString("show-team")));
+        }
 		
 		if (section.contains("show-name")) {
 			showPlayerName.setFlag(section.getBoolean("show-name"));

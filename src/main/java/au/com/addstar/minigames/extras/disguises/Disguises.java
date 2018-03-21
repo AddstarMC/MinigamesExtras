@@ -7,7 +7,7 @@ import au.com.mineauz.minigames.minigame.modules.LoadoutModule;
 
 public final class Disguises {
 	public static void initialize(Minigames minigames, Plugin thisPlugin) {
-		minigames.mdata.addModule(DisguisesModule.class);
+		minigames.getMinigameData().addModule(DisguisesModule.class);
 		LoadoutModule.registerAddon(thisPlugin, new DisguiseAddon());
 	}
 }

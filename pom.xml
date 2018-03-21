@@ -3,8 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>au.com.addstar</groupId>
 	<artifactId>MinigamesExtras</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	
+	<version>1.0.1-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <build.number />
+        <plugin.version>${project.version}-${build.number}</plugin.version>
+        <spigot.version>1.12.2-R0.1-SNAPSHOT</spigot.version>
+    </properties>
 	<repositories>
 		<!-- For spigot-api -->
 		<repository>
@@ -21,8 +26,15 @@
 		</repository>
 		<!-- For LibsDisguises -->
 		<repository>
-			<id>LibsDisguises Repo</id>
-			<url>http://psmc.ca/repo/</url>
+			<id>md_5-releases</id>
+			<url>https://repo.md-5.net/content/repositories/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>md_5-snapshots</id>
+			<url>https://repo.md-5.net/content/repositories/snapshots/</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -41,35 +53,35 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<version>${spigot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>au.com.mineauz</groupId>
 			<artifactId>Minigames</artifactId>
-			<version>1.8.0-SNAPSHOT</version>
+			<version>1.12.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>au.com.mineauz</groupId>
 			<artifactId>Minigames-Regions</artifactId>
-			<version>1.8.0-SNAPSHOT</version>
+			<version>1.12.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>au.com.addstar</groupId>
 			<artifactId>Monolith</artifactId>
-			<version>1.2.2-SNAPSHOT</version>
+			<version>1.4.8-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>LibsDisguises</groupId>
 			<artifactId>LibsDisguises</artifactId>
-			<version>8.6.4-SNAPSHOT</version>
+			<version>9.5.1-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -97,8 +109,8 @@
 				<version>3.3</version>
 				
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>

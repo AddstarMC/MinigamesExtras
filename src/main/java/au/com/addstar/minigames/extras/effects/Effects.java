@@ -17,7 +17,7 @@ public final class Effects {
 	private static EmitterManager manager;
 	
 	public static void initialize(Minigames minigames, Main regions) {
-		minigames.mdata.addModule(EffectModule.class);
+		minigames.minigameManager.addModule(EffectModule.class);
 		Actions.addAction("ATTACH_EFFECT", AttachEffectAction.class);
 		Actions.addAction("PLAY_EFFECT", PlayEffectAction.class);
 		Actions.addAction("STOP_EFFECT", StopEffectAction.class);

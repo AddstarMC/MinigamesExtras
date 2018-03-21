@@ -2,6 +2,7 @@ package au.com.addstar.minigames.extras.effects.menu;
 
 import java.util.Arrays;
 
+import au.com.mineauz.minigames.MinigameMessageType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -136,7 +137,7 @@ public class MenuItemVector extends MenuItem {
 	public void checkValidEntry(String entry) {
 		String[] parts = entry.split(":");
 		if (parts.length != 3) {
-			getViewer().sendMessage(ChatColor.RED + "Entered value does not match the required format");
+			getViewer().sendMessage( "Entered value does not match the required format", MinigameMessageType.ERROR);
 		} else {
 			try {
 				double x,y,z;
@@ -149,7 +150,7 @@ public class MenuItemVector extends MenuItem {
 				vector.setZ(z);
 				update();
 			} catch (NumberFormatException e) {
-				getViewer().sendMessage(ChatColor.RED + "Entered value does not match the required format");
+				getViewer().sendMessage("Entered value does not match the required format", MinigameMessageType.ERROR);
 			}
 		}
 		

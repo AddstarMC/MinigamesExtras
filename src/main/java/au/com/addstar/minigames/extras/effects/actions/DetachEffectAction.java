@@ -2,6 +2,7 @@ package au.com.addstar.minigames.extras.effects.actions;
 
 import java.util.Map;
 
+import au.com.mineauz.minigamesregions.actions.AbstractAction;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import au.com.addstar.minigames.extras.effects.EffectModule;
@@ -11,7 +12,7 @@ import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;
 import au.com.mineauz.minigamesregions.actions.ActionInterface;
 
-public class DetachEffectAction extends ActionInterface {
+public class DetachEffectAction extends AbstractAction {
 	@Override
 	public String getName() {
 		return "DETACH_EFFECT";

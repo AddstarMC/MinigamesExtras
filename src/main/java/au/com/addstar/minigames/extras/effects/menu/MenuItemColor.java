@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
 
+import au.com.mineauz.minigames.MinigameMessageType;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -87,13 +88,12 @@ public class MenuItemColor extends MenuItem {
 					int rgb = Integer.parseInt(entry, 16);
 					
 					if (rgb < 0) {
-						player.sendMessage(ChatColor.RED + "That is not a valid color.");
+						player.sendMessage("That is not a valid color.", MinigameMessageType.ERROR);
 					} else {
 						callback.setValue(Color.fromRGB(rgb));
 					}
 				} catch (NumberFormatException e) {
-					player.sendMessage(ChatColor.RED + "That is not a valid color.");
-				}
+					player.sendMessage("That is not a valid color.", MinigameMessageType.ERROR);				}
 			}
 		}
 		

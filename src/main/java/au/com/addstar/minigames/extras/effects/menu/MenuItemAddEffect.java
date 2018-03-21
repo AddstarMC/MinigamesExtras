@@ -1,5 +1,6 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
+import au.com.mineauz.minigames.MinigameMessageType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -38,7 +39,7 @@ public class MenuItemAddEffect extends MenuItem {
 	public void checkValidEntry(String entry) {
 		getContainer().cancelReopenTimer();
 		if (module.getEffect(entry) != null) {
-			getContainer().getViewer().sendMessage("That effect already exists");
+			getContainer().getViewer().sendMessage("That effect already exists", MinigameMessageType.ERROR);
 			getContainer().displayMenu(getContainer().getViewer());
 		} else {
 			name = entry;

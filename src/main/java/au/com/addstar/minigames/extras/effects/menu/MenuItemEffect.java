@@ -1,5 +1,6 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
+import au.com.mineauz.minigames.MinigameMessageType;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -63,12 +64,12 @@ public class MenuItemEffect extends MenuItem {
 	@Override
 	public void checkValidEntry(String entry) {
 		if (entry.equalsIgnoreCase(name)) {
-			getContainer().getViewer().sendMessage(ChatColor.GRAY + "Rename cancelled");
+			getContainer().getViewer().sendMessage(ChatColor.GRAY + "Rename cancelled", MinigameMessageType.INFO);
 			return;
 		}
 		
 		if (module.getEffect(entry) != null) {
-			getContainer().getViewer().sendMessage(ChatColor.RED + "That effect already exists");
+			getContainer().getViewer().sendMessage("That effect already exists", MinigameMessageType.ERROR);
 		} else {
 			module.removeEffect(name);
 			name = entry;
