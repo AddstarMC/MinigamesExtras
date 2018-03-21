@@ -1,22 +1,20 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Map;
-
 import au.com.mineauz.minigames.MinigameMessageType;
+import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.menu.Callback;
+import au.com.mineauz.minigames.menu.MenuItem;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.google.common.collect.Maps;
-
-import au.com.mineauz.minigames.MinigamePlayer;
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.MenuItem;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Map;
 
 public class MenuItemColor extends MenuItem {
 	private static final Map<String, Color> namedColours = Maps.newHashMap();
@@ -60,7 +58,7 @@ public class MenuItemColor extends MenuItem {
 		MinigamePlayer player = getContainer().getViewer();
 		player.setNoClose(true);
 		player.getPlayer().closeInventory();
-		player.sendMessage("Enter the new value into chat for " + getName() + ". Please enter the name of a colour, the hex value, or 'none'. The menu will automatically reopen in 15s if nothing is entered.", null);
+        player.sendInfoMessage("Enter the new value into chat for " + getName() + ". Please enter the name of a colour, the hex value, or 'none'. The menu will automatically reopen in 15s if nothing is entered.");
 		
 		player.setManualEntry(this);
 		getContainer().startReopenTimer(15);

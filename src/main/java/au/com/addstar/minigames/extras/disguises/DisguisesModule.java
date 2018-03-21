@@ -1,21 +1,15 @@
 package au.com.addstar.minigames.extras.disguises;
 
-import java.util.Map;
-
+import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.config.Flag;
+import au.com.mineauz.minigames.menu.*;
+import au.com.mineauz.minigames.minigame.Minigame;
+import au.com.mineauz.minigames.minigame.modules.MinigameModule;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import au.com.mineauz.minigames.MinigamePlayer;
-import au.com.mineauz.minigames.config.Flag;
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.InteractionInterface;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
-import au.com.mineauz.minigames.menu.MenuItemBack;
-import au.com.mineauz.minigames.menu.MenuItemCustom;
-import au.com.mineauz.minigames.minigame.Minigame;
-import au.com.mineauz.minigames.minigame.modules.MinigameModule;
+import java.util.Map;
 
 public class DisguisesModule extends MinigameModule {
 	public DisguisesModule(Minigame mgm) {
@@ -25,14 +19,11 @@ public class DisguisesModule extends MinigameModule {
 	@Override
 	public void addEditMenuOptions(final Menu menu) {
 		MenuItemCustom openOptions = new MenuItemCustom("Disguise Settings", Material.POTION);
-		openOptions.setClick(new InteractionInterface() {
-			@Override
-			public Object interact(Object arg0) {
-				Menu subMenu = createMenu(menu, menu.getViewer());
-				subMenu.displayMenu(menu.getViewer());
+		openOptions.setClick(arg0 -> {
+			Menu subMenu = createMenu(menu, menu.getViewer());
+			subMenu.displayMenu(menu.getViewer());
 
-				return null;
-			}
+			return null;
 		});
 
 		menu.addItem(openOptions);

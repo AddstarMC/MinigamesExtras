@@ -1,15 +1,16 @@
 package au.com.addstar.minigames.extras;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
 import au.com.addstar.minigames.extras.disguises.Disguises;
 import au.com.addstar.minigames.extras.effects.Effects;
 import au.com.addstar.minigames.extras.visibility.Visibility;
 import au.com.mineauz.minigames.Minigames;
 import au.com.mineauz.minigamesregions.Main;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class MainPlugin extends JavaPlugin {
-	@Override
+
+
+    @Override
 	public void onEnable() {
 		Minigames minigamesPlugin = Minigames.plugin;
 		

@@ -1,15 +1,5 @@
 package au.com.addstar.minigames.extras.effects.actions;
 
-import java.util.Map;
-
-import au.com.mineauz.minigamesregions.actions.AbstractAction;
-import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
-
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.addstar.minigames.extras.effects.EmitterTemplate;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemVector;
@@ -19,14 +9,18 @@ import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.emitters.Emitter;
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.MinigameUtils;
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
-import au.com.mineauz.minigames.menu.MenuItemBack;
-import au.com.mineauz.minigames.menu.MenuItemBoolean;
-import au.com.mineauz.minigames.menu.MenuItemNewLine;
+import au.com.mineauz.minigames.menu.*;
 import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;
+import au.com.mineauz.minigamesregions.actions.AbstractAction;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
+
+import java.util.Map;
 
 public class AttachEffectAction extends AbstractAction {
 	private EmitterTemplate template;
@@ -94,12 +88,12 @@ public class AttachEffectAction extends AbstractAction {
 		EntityAttachment<Player> attachment;
 		
 		if (relativeToLook) {
-			attachment = new EntityAttachment<Player>(
-				player.getPlayer(), 
-				AttachmentFunctions.lookRelativeOffset(attachmentOffset.clone())
-				);
+            attachment = new EntityAttachment<>(
+                    player.getPlayer(),
+                    AttachmentFunctions.lookRelativeOffset(attachmentOffset.clone())
+            );
 		} else {
-			attachment = new EntityAttachment<Player>(player.getPlayer(), attachmentOffset.clone());
+            attachment = new EntityAttachment<>(player.getPlayer(), attachmentOffset.clone());
 		}
 		
 		Emitter emitter = template.create(attachment);

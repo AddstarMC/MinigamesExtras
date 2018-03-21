@@ -1,17 +1,16 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
-import java.util.Arrays;
-
-import org.apache.commons.lang3.text.WordUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import au.com.addstar.minigames.extras.effects.EffectMenus;
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.mineauz.minigames.menu.Callback;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
+import org.apache.commons.lang3.text.WordUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Collections;
 
 public class MenuItemSelectEffect extends MenuItem {
 	private final EffectModule module;
@@ -28,9 +27,9 @@ public class MenuItemSelectEffect extends MenuItem {
 	@Override
 	public void update() {
 		if (callback.getValue() == null) {
-			setDescription(Arrays.asList(ChatColor.RED + "Not Set"));			
+            setDescription(Collections.singletonList(ChatColor.RED + "Not Set"));
 		} else {
-			setDescription(Arrays.asList(ChatColor.GREEN + WordUtils.capitalizeFully(callback.getValue())));
+            setDescription(Collections.singletonList(ChatColor.GREEN + WordUtils.capitalizeFully(callback.getValue())));
 		}
 	}
 	

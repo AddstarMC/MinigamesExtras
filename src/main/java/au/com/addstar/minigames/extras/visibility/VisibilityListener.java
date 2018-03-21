@@ -1,15 +1,14 @@
 package au.com.addstar.minigames.extras.visibility;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.events.JoinMinigameEvent;
 import au.com.mineauz.minigames.events.QuitMinigameEvent;
 import au.com.mineauz.minigames.gametypes.MinigameType;
 import au.com.mineauz.minigames.minigame.Minigame;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 
 class VisibilityListener implements Listener {
 	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
@@ -22,10 +21,10 @@ class VisibilityListener implements Listener {
 		Player thisPlayer = event.getPlayer();
 		VisibilityModule module = (VisibilityModule)minigame.getModule(VisibilityModule.Name);
 		if (module.getHidePlayers()) {
-			// Hide players from eachother
+            // Hide players from each other
 			for (MinigamePlayer player : minigame.getPlayers()) {
-				player.getPlayer().hidePlayer(thisPlayer);
-				thisPlayer.hidePlayer(player.getPlayer());
+                player.getPlayer().hidePlayer(Visibility.plugin, thisPlayer);
+                thisPlayer.hidePlayer(Visibility.plugin, player.getPlayer());
 			}
 		}
 	}
@@ -40,10 +39,10 @@ class VisibilityListener implements Listener {
 		Player thisPlayer = event.getPlayer();
 		VisibilityModule module = (VisibilityModule)minigame.getModule(VisibilityModule.Name);
 		if (module.getHidePlayers()) {
-			// Show players to eachother
+            // Show players to each other
 			for (MinigamePlayer player : minigame.getPlayers()) {
-				player.getPlayer().showPlayer(thisPlayer);
-				thisPlayer.showPlayer(player.getPlayer());
+                player.getPlayer().showPlayer(Visibility.plugin, thisPlayer);
+                thisPlayer.showPlayer(Visibility.plugin, player.getPlayer());
 			}
 		}
 	}

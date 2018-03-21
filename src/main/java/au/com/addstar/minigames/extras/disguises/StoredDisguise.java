@@ -1,15 +1,10 @@
 package au.com.addstar.minigames.extras.disguises;
 
+import me.libraryaddict.disguise.disguisetypes.*;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
-
-import me.libraryaddict.disguise.disguisetypes.Disguise;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
 class StoredDisguise {
 	private final DisguiseType type;
@@ -76,13 +71,11 @@ class StoredDisguise {
 	}
 
 	public static StoredDisguise entityDisguise(EntityType entity) {
-		StoredDisguise disguise = new StoredDisguise(DisguiseType.getType(entity));
-		return disguise;
+        return new StoredDisguise(DisguiseType.getType(entity));
 	}
 
 	public static StoredDisguise disguise(DisguiseType type) {
-		StoredDisguise disguise = new StoredDisguise(type);
-		return disguise;
+        return new StoredDisguise(type);
 	}
 	
 	public static StoredDisguise load(ConfigurationSection section) {

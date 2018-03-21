@@ -1,19 +1,18 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
+import au.com.addstar.minigames.extras.effects.EffectMenus;
+import au.com.addstar.minigames.extras.effects.EffectModule;
+import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.mineauz.minigames.MinigameMessageType;
+import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.MinigameUtils;
+import au.com.mineauz.minigames.menu.Menu;
+import au.com.mineauz.minigames.menu.MenuItem;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import au.com.addstar.minigames.extras.effects.EffectMenus;
-import au.com.addstar.minigames.extras.effects.EffectModule;
-import au.com.addstar.monolith.effects.BaseEffect;
-import au.com.mineauz.minigames.MinigamePlayer;
-import au.com.mineauz.minigames.MinigameUtils;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
 
 public class MenuItemEffect extends MenuItem {
 	private final BaseEffect effect;
@@ -54,7 +53,7 @@ public class MenuItemEffect extends MenuItem {
 		MinigamePlayer player = getContainer().getViewer();
 		player.setNoClose(true);
 		player.getPlayer().closeInventory();
-		player.sendMessage("Enter the new name of this effect. The menu will automatically reopen in 20s if nothing is entered.", null);
+        player.sendInfoMessage("Enter the new name of this effect. The menu will automatically reopen in 20s if nothing is entered.");
 		
 		player.setManualEntry(this);
 		getContainer().startReopenTimer(20);

@@ -1,16 +1,14 @@
 package au.com.addstar.minigames.extras.effects.actions;
 
-import java.util.Map;
-
-import au.com.mineauz.minigamesregions.actions.AbstractAction;
-import org.bukkit.configuration.file.FileConfiguration;
-
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;
-import au.com.mineauz.minigamesregions.actions.ActionInterface;
+import au.com.mineauz.minigamesregions.actions.AbstractAction;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.Map;
 
 public class DetachEffectAction extends AbstractAction {
 	@Override
