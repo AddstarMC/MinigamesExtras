@@ -76,7 +76,6 @@ public class DisguiseSelection {
 		return menu;
 	}
 	
-	@SuppressWarnings( "deprecation" )
 	private static ItemStack getDisplayItem(DisguiseType type) {
 		Material itemType;
 		int data = 0;
@@ -247,7 +246,6 @@ public class DisguiseSelection {
 			else
 				itemType = Material.BARRIER;
 		}
-		
 		return new ItemStack(itemType, 1, (short)data);
 	}
 	
@@ -258,7 +256,8 @@ public class DisguiseSelection {
 	public static Menu createEditMenu(Menu previous, MinigamePlayer player, DisguiseSettings settings) {
 		Menu subMenu = new Menu(6, "Disguise Settings", player);
 		
-		subMenu.addItem(new MenuItemEnum<ShowSetting>("Disguise To Self", Material.ARMOR_STAND, settings.getShowDisguiseSelfCallback(), ShowSetting.class));
+		subMenu.addItem(new MenuItemEnum<>("Disguise To Self", Material.ARMOR_STAND, settings.getShowDisguiseSelfCallback(), ShowSetting.class));
+		subMenu.addItem(new MenuItemEnum<>("Disguise to Team", Material.BREWING_STAND_ITEM,settings.getShowDisguiseTeamCallback(),ShowSetting.class));
 		subMenu.addItem(new MenuItemBoolean("Show Player Name", Material.LEVER, settings.getShowPlayerNameCallback()));
 		
 		subMenu.addItem(new MenuItemNewLine());

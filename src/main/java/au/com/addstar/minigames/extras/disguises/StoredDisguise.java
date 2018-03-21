@@ -34,7 +34,6 @@ class StoredDisguise {
 		return playerName;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public Disguise createDisguise() {
 		switch (type) {
 		case PLAYER:
@@ -94,7 +93,6 @@ class StoredDisguise {
 		return disguise;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static StoredDisguise blockDisguise(Material material, int data) {
 		StoredDisguise disguise = new StoredDisguise(DisguiseType.FALLING_BLOCK);
 		disguise.block = material.getNewData((byte) data);

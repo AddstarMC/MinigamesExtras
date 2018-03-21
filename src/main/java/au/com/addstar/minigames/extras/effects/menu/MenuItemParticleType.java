@@ -2,6 +2,7 @@ package au.com.addstar.minigames.extras.effects.menu;
 
 import java.util.Arrays;
 
+import au.com.mineauz.minigames.MinigameMessageType;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -70,7 +71,7 @@ public class MenuItemParticleType extends MenuItem {
 							effect.setType(type, material);
 							goBack();
 						} else {
-							parent.getViewer().sendMessage("Invalid block type!", "error");
+							parent.getViewer().sendMessage("Invalid block type!", MinigameMessageType.ERROR);
 						}
 					}
 					
@@ -101,16 +102,16 @@ public class MenuItemParticleType extends MenuItem {
 							try {
 								byte data = Byte.parseByte(dataPart);
 								if (data < 0 || data > 15) {
-									parent.getViewer().sendMessage("Invalid block data", "error");
+									parent.getViewer().sendMessage("Invalid block data", MinigameMessageType.ERROR);
 								} else {
 									effect.setType(type, material.getNewData(data));
 									goBack();
 								}
 							} catch (NumberFormatException e) {
-								parent.getViewer().sendMessage("Invalid block data", "error");
+								parent.getViewer().sendMessage("Invalid block data", MinigameMessageType.ERROR);
 							}
 						} else {
-							parent.getViewer().sendMessage("Invalid block type!", "error");
+							parent.getViewer().sendMessage("Invalid block type!", MinigameMessageType.ERROR);
 						}
 					}
 					

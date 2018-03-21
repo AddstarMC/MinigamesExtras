@@ -2,6 +2,8 @@ package au.com.addstar.minigames.extras.effects.actions;
 
 import java.util.Map;
 
+import au.com.mineauz.minigames.script.ScriptObject;
+import au.com.mineauz.minigamesregions.actions.AbstractAction;
 import org.bukkit.configuration.file.FileConfiguration;
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.mineauz.minigames.MinigamePlayer;
@@ -10,7 +12,7 @@ import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;
 import au.com.mineauz.minigamesregions.actions.ActionInterface;
 
-public class StopEffectAction extends ActionInterface {
+public class StopEffectAction extends AbstractAction {
 	@Override
 	public String getName() {
 		return "STOP_EFFECT";
@@ -62,5 +64,5 @@ public class StopEffectAction extends ActionInterface {
 	public boolean displayMenu(final MinigamePlayer player, final Menu previous) {
 		return false;
 	}
-
+	
 }

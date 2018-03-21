@@ -2,6 +2,7 @@ package au.com.addstar.minigames.extras.effects.actions;
 
 import java.util.Map;
 
+import au.com.mineauz.minigamesregions.actions.AbstractAction;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -23,7 +24,7 @@ import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;
 import au.com.mineauz.minigamesregions.actions.ActionInterface;
 
-public class PlayEffectAction extends ActionInterface {
+public class PlayEffectAction extends AbstractAction {
 	private EmitterTemplate template;
 	private boolean isPrivate;
 	
