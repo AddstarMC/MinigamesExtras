@@ -1,14 +1,14 @@
 package au.com.addstar.minigames.extras.disguises;
 
-import java.util.Arrays;
-
+import au.com.mineauz.minigames.menu.Callback;
+import au.com.mineauz.minigames.menu.Menu;
+import au.com.mineauz.minigames.menu.MenuItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MenuItemSelectDisguise extends MenuItem {
 	private Callback<StoredDisguise> callback;
@@ -27,7 +27,7 @@ public class MenuItemSelectDisguise extends MenuItem {
 		if (disguise != null) {
 			setDescription(Arrays.asList(ChatColor.GREEN + disguise.toString(), "Shift + Right click to clear disguise"));
 		} else {
-			setDescription(Arrays.asList(ChatColor.GRAY + "None"));
+            setDescription(Collections.singletonList(ChatColor.GRAY + "None"));
 		}
 	}
 	

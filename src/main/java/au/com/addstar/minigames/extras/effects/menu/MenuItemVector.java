@@ -1,15 +1,14 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
-import java.util.Arrays;
-
 import au.com.mineauz.minigames.MinigameMessageType;
+import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.menu.MenuItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import au.com.mineauz.minigames.MinigamePlayer;
-import au.com.mineauz.minigames.menu.MenuItem;
+import java.util.Collections;
 
 public class MenuItemVector extends MenuItem {
 	private Vector vector;
@@ -27,7 +26,7 @@ public class MenuItemVector extends MenuItem {
 	
 	@Override
 	public void update() {
-		StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 		
 		// X
 		if (component == 0) {
@@ -63,8 +62,8 @@ public class MenuItemVector extends MenuItem {
 		
 		buffer.append(String.format("%02.2f", vector.getZ()));
 		buffer.append(ChatColor.GREEN);
-		
-		setDescription(Arrays.asList(buffer.toString()));
+
+        setDescription(Collections.singletonList(buffer.toString()));
 	}
 
 	private void add(float amount) {
@@ -126,7 +125,7 @@ public class MenuItemVector extends MenuItem {
 		MinigamePlayer player = getViewer();
 		player.setNoClose(true);
 		player.getPlayer().closeInventory();
-		player.sendMessage("Enter the new value into chat for " + getName() + ". The expected format is '<X>:<Y>:<Z>' where <?> represents a floating point value. The menu will automatically reopen in 10s if nothing is entered.", null);
+        player.sendInfoMessage("Enter the new value into chat for " + getName() + ". The expected format is '<X>:<Y>:<Z>' where <?> represents a floating point value. The menu will automatically reopen in 10s if nothing is entered.");
 		
 		player.setManualEntry(this);
 		getContainer().startReopenTimer(10);

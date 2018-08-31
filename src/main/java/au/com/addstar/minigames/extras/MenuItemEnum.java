@@ -1,20 +1,17 @@
 package au.com.addstar.minigames.extras;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-
+import au.com.mineauz.minigames.menu.Callback;
+import au.com.mineauz.minigames.menu.MenuItem;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.MenuItem;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
 
 public class MenuItemEnum<T extends Enum<T>> extends MenuItem {
 	private final List<String> baseDescription;
@@ -54,7 +51,7 @@ public class MenuItemEnum<T extends Enum<T>> extends MenuItem {
 		
 		int position = enumList.indexOf(value);
 		if (position == -1) {
-			return Arrays.asList(ChatColor.RED + "*ERROR*");
+            return Collections.singletonList(ChatColor.RED + "*ERROR*");
 		}
 		
 		int last = position - 1;

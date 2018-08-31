@@ -1,19 +1,19 @@
 package au.com.addstar.minigames.extras.disguises;
 
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.Disguise;
-import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
-
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-
 import au.com.addstar.minigames.extras.BasicFlag;
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.config.BooleanFlag;
 import au.com.mineauz.minigames.config.EnumFlag;
 import au.com.mineauz.minigames.menu.Callback;
-
 import com.google.common.base.Preconditions;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.Disguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class DisguiseSettings {
 	private BasicFlag<StoredDisguise> disguise;
@@ -28,13 +28,13 @@ class DisguiseSettings {
 	private BooleanFlag showPlayerName;
 	
 	public DisguiseSettings() {
-		disguise = new BasicFlag<StoredDisguise>();
-		alternate = new BasicFlag<StoredDisguise>();
+        disguise = new BasicFlag<>();
+        alternate = new BasicFlag<>();
 		showPlayerName = new BooleanFlag(true, "");
 		
 		// Default values
-		showDisguiseSelf = new EnumFlag<ShowSetting>(ShowSetting.Hide, "Show Disguise Self");
-		showDisguiseTeam = new EnumFlag<ShowSetting>(ShowSetting.Hide, "Show Team Disguise");
+        showDisguiseSelf = new EnumFlag<>(ShowSetting.Hide, "Show Disguise Self");
+        showDisguiseTeam = new EnumFlag<>(ShowSetting.Hide, "Show Team Disguise");
 	}
 	
 	// Primary disguise
@@ -144,10 +144,30 @@ class DisguiseSettings {
 			}
 			break;
 		}
-		
-		DisguiseAPI.disguiseEntity(player.getPlayer(), primary);
+        List<Player> teamPlayerNotSeePrimary = new ArrayList<>();
+        List<Player> teamPlayerSeeSecondary = new ArrayList<>();
+        for (MinigamePlayer mp : player.getMinigame().getPlayers()) {
+            if (mp.getTeam().equals(mp.getTeam())) {
+                switch (getShowDisguiseTeam()) {
+                    case Hide:
+                        teamPlayerNotSeePrimary.add(mp.getPlayer());
+                        break;
+                    case Primary:
+                        break;
+                    case Secondary:
+                        teamPlayerNotSeePrimary.add(mp.getPlayer());
+                        teamPlayerSeeSecondary.add(mp.getPlayer());
+                }
+            }
+        }
+
+
+        DisguiseAPI.disguiseIgnorePlayers(player.getPlayer(), primary, teamPlayerNotSeePrimary);
 		if (secondary != null) {
 			DisguiseAPI.disguiseToPlayers(player.getPlayer(), secondary, player.getPlayer());
+            if (teamPlayerSeeSecondary.size() > 0) {
+                DisguiseAPI.disguiseToPlayers(player.getPlayer(), secondary, teamPlayerSeeSecondary);
+            }
 		}
 	}
 	

@@ -1,20 +1,16 @@
 package au.com.addstar.minigames.extras.disguises;
 
-import org.apache.commons.lang.WordUtils;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import au.com.addstar.minigames.extras.MenuItemEnum;
 import au.com.addstar.minigames.extras.disguises.DisguiseSettings.ShowSetting;
 import au.com.mineauz.minigames.MinigamePlayer;
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
-import au.com.mineauz.minigames.menu.MenuItemBack;
-import au.com.mineauz.minigames.menu.MenuItemBoolean;
-import au.com.mineauz.minigames.menu.MenuItemNewLine;
-import au.com.mineauz.minigames.menu.MenuItemPage;
+import au.com.mineauz.minigames.menu.*;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.Material;
+import org.bukkit.SkullType;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SpawnEggMeta;
+import org.bukkit.material.MaterialData;
 
 public class DisguiseSelection {
 	public static Menu createDisguiseSelectMenu(final Menu previous, final MinigamePlayer viewer, final Callback<StoredDisguise> callback) {
@@ -78,6 +74,7 @@ public class DisguiseSelection {
 	
 	private static ItemStack getDisplayItem(DisguiseType type) {
 		Material itemType;
+        ItemStack item;
 		int data = 0;
 		switch (type) {
 		case ARMOR_STAND:
@@ -228,7 +225,7 @@ public class DisguiseSelection {
 			break;
 		case WITHER:
 			itemType = Material.SKULL_ITEM;
-			data = 1;
+            data = SkullType.WITHER.ordinal();
 			break;
 		case ZOMBIE:
 			itemType = Material.ROTTEN_FLESH;
@@ -241,12 +238,17 @@ public class DisguiseSelection {
 			if (type.isMob()) {
 				// entity ids can actually go higher than this :/
 				itemType = Material.MONSTER_EGG;
-				data = type.getEntityType().getTypeId();
 			}
 			else
 				itemType = Material.BARRIER;
 		}
-		return new ItemStack(itemType, 1, (short)data);
+        MaterialData mdata = new MaterialData(itemType, (byte) data);
+        item = mdata.toItemStack(1);
+        if (itemType == Material.MONSTER_EGG) {
+            SpawnEggMeta meta = (SpawnEggMeta) item.getItemMeta();
+            meta.setSpawnedType(type.getEntityType());
+        }
+        return item;
 	}
 	
 	private static String getDisguiseName(DisguiseType type) {

@@ -1,21 +1,15 @@
 package au.com.addstar.minigames.extras.effects;
 
-import org.apache.commons.lang.WordUtils;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import au.com.addstar.minigames.extras.effects.menu.MenuItemColor;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemParticleType;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemVector;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.EffectParticle;
-import au.com.mineauz.minigames.menu.Callback;
-import au.com.mineauz.minigames.menu.Menu;
-import au.com.mineauz.minigames.menu.MenuItem;
-import au.com.mineauz.minigames.menu.MenuItemBack;
-import au.com.mineauz.minigames.menu.MenuItemDecimal;
-import au.com.mineauz.minigames.menu.MenuItemInteger;
+import au.com.mineauz.minigames.menu.*;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public final class EffectMenus {
 	private EffectMenus() {}
@@ -50,7 +44,7 @@ public final class EffectMenus {
 		menu.addItem(new MenuItemInteger("Particle Count", Material.PAPER, new Callback<Integer>() {
 			@Override
 			public void setValue(Integer value) {
-				effect.setCount(value.intValue());
+                effect.setCount(value);
 			}
 			
 			@Override

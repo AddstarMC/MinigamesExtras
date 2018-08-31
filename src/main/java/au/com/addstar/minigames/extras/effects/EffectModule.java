@@ -1,31 +1,10 @@
 package au.com.addstar.minigames.extras.effects;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import com.google.common.base.Preconditions;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
-
 import au.com.addstar.minigames.extras.effects.menu.MenuItemAddEffect;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemEffect;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.emitters.ContinuousEmitter;
 import au.com.addstar.monolith.effects.emitters.Emitter;
-import au.com.addstar.monolith.effects.emitters.EmitterManager;
-import au.com.mineauz.minigames.Minigames;
 import au.com.mineauz.minigames.config.Flag;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
@@ -34,6 +13,21 @@ import au.com.mineauz.minigames.minigame.Minigame;
 import au.com.mineauz.minigames.minigame.MinigameState;
 import au.com.mineauz.minigames.minigame.modules.MinigameModule;
 import au.com.mineauz.minigamesregions.Node;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class EffectModule extends MinigameModule {
 	private static final String NAME = "EFFECTS";
@@ -50,13 +44,8 @@ public class EffectModule extends MinigameModule {
 		
 		effects = Maps.newHashMap();
 		nodeEmitters = Maps.newIdentityHashMap();
-		sessionEmitters = Sets.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
-		playerEmitters = Multimaps.newSetMultimap(Maps.<Player, Collection<Emitter>>newHashMap(), new Supplier<Set<Emitter>>() {
-			@Override
-			public Set<Emitter> get() {
-				return Sets.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
-			}
-		});
+		sessionEmitters = Collections.newSetFromMap(Maps.<Emitter, Boolean>newIdentityHashMap());
+		playerEmitters = Multimaps.newSetMultimap(Maps.<Player, Collection<Emitter>>newHashMap(), () -> Collections.newSetFromMap(Maps.newIdentityHashMap()));
 	}
 
 	@Override
@@ -215,10 +204,7 @@ public class EffectModule extends MinigameModule {
 			return clazz.newInstance();
 		} catch (ClassNotFoundException e) {
 			return null;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IllegalAccessException e) {
+		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 			return null;
 		}

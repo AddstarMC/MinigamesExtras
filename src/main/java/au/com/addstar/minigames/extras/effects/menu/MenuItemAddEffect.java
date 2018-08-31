@@ -1,17 +1,16 @@
 package au.com.addstar.minigames.extras.effects.menu;
 
-import au.com.mineauz.minigames.MinigameMessageType;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import au.com.addstar.minigames.extras.effects.EffectMenus;
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.EffectParticle;
+import au.com.mineauz.minigames.MinigameMessageType;
 import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
 import au.com.mineauz.minigames.menu.MenuItemBack;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class MenuItemAddEffect extends MenuItem {
 	private final EffectModule module;
@@ -28,7 +27,7 @@ public class MenuItemAddEffect extends MenuItem {
 		MinigamePlayer player = getContainer().getViewer();
 		player.setNoClose(true);
 		player.getPlayer().closeInventory();
-		player.sendMessage("Enter the name of this effect. The menu will automatically reopen in 20s if nothing is entered.", null);
+        player.sendInfoMessage("Enter the name of this effect. The menu will automatically reopen in 20s if nothing is entered.");
 		
 		player.setManualEntry(this);
 		getContainer().startReopenTimer(20);
