@@ -8,7 +8,7 @@ public final class Visibility {
     public static Minigames plugin;
 	public static void initialize(Minigames minigames, Plugin thisPlugin) {
 		plugin = minigames;
-		minigames.minigameManager.addModule(VisibilityModule.class);
+		minigames.getMinigameManager().addModule(VisibilityModule.class);
 		Bukkit.getPluginManager().registerEvents(new VisibilityListener(), thisPlugin);
 	}
 }

@@ -12,7 +12,7 @@ public class MainPlugin extends JavaPlugin {
 
     @Override
 	public void onEnable() {
-		Minigames minigamesPlugin = Minigames.plugin;
+		Minigames minigamesPlugin = Minigames.getPlugin();
 		
 		// Enable each add-on
 		if (getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {

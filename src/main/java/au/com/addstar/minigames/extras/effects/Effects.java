@@ -1,7 +1,5 @@
 package au.com.addstar.minigames.extras.effects;
 
-import org.bukkit.Bukkit;
-
 import au.com.addstar.minigames.extras.effects.actions.AttachEffectAction;
 import au.com.addstar.minigames.extras.effects.actions.DetachEffectAction;
 import au.com.addstar.minigames.extras.effects.actions.PlayEffectAction;
@@ -10,6 +8,7 @@ import au.com.addstar.monolith.effects.emitters.EmitterManager;
 import au.com.mineauz.minigames.Minigames;
 import au.com.mineauz.minigamesregions.Main;
 import au.com.mineauz.minigamesregions.actions.Actions;
+import org.bukkit.Bukkit;
 
 public final class Effects {
 	private Effects() {}
@@ -17,7 +16,7 @@ public final class Effects {
 	private static EmitterManager manager;
 	
 	public static void initialize(Minigames minigames, Main regions) {
-		minigames.minigameManager.addModule(EffectModule.class);
+		minigames.getMinigameManager().addModule(EffectModule.class);
 		Actions.addAction("ATTACH_EFFECT", AttachEffectAction.class);
 		Actions.addAction("PLAY_EFFECT", PlayEffectAction.class);
 		Actions.addAction("STOP_EFFECT", StopEffectAction.class);

@@ -141,7 +141,7 @@ public class MenuItemParticleType extends MenuItem {
 	}
 	
 	private void goBack() {
-        Bukkit.getScheduler().runTask(Minigames.plugin, () -> getContainer().displayMenu(getContainer().getViewer()));
+        Bukkit.getScheduler().runTask(Minigames.getPlugin(), () -> getContainer().displayMenu(getContainer().getViewer()));
 	}
 	
 }
