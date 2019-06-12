@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>au.com.mineauz</groupId>
 			<artifactId>Minigames-Regions</artifactId>
-            <version>1.12.2-SNAPSHOT</version>
+            <version>1.13.0-ALPHA</version>
 			<scope>provided</scope>
 		</dependency>
 		
