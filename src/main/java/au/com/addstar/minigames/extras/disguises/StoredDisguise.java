@@ -1,7 +1,9 @@
 package au.com.addstar.minigames.extras.disguises;
 
 import me.libraryaddict.disguise.disguisetypes.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -10,7 +12,7 @@ class StoredDisguise {
 	private final DisguiseType type;
 
 	// Other information
-	private MaterialData block;
+	private Material block;
 	private String playerName;
 
 	private StoredDisguise(DisguiseType type) {
@@ -21,7 +23,7 @@ class StoredDisguise {
 		return type;
 	}
 
-	public MaterialData getBlockData() {
+	public Material getMaterial() {
 		return block;
 	}
 
@@ -34,7 +36,7 @@ class StoredDisguise {
 		case PLAYER:
 			return new PlayerDisguise(playerName);
 		case FALLING_BLOCK:
-			return new MiscDisguise(DisguiseType.FALLING_BLOCK, block.getItemTypeId(), block.getData());
+			return new MiscDisguise(DisguiseType.FALLING_BLOCK, block);
 		default:
 			if (type.isMob()) {
 				return new MobDisguise(type, true);
@@ -49,8 +51,7 @@ class StoredDisguise {
 		if (type == DisguiseType.PLAYER) {
 			section.set("player", playerName);
 		} else if (type == DisguiseType.FALLING_BLOCK) {
-			section.set("block", block.getItemType().name());
-			section.set("block-data", block.getData());
+			section.set("block", block);
 		}
 	}
 	
@@ -58,8 +59,7 @@ class StoredDisguise {
 		if (type == DisguiseType.PLAYER) {
 			playerName = section.getString("player");
 		} else if (type == DisguiseType.FALLING_BLOCK) {
-			Material blockType = Material.valueOf(section.getString("block"));
-			block = blockType.getNewData((byte)section.getInt("block-data"));
+			block  = Material.matchMaterial(section.getString("block"));
 		}
 	}
 
@@ -86,9 +86,9 @@ class StoredDisguise {
 		return disguise;
 	}
 
-	public static StoredDisguise blockDisguise(Material material, int data) {
+	public static StoredDisguise blockDisguise(Material material) {
 		StoredDisguise disguise = new StoredDisguise(DisguiseType.FALLING_BLOCK);
-		disguise.block = material.getNewData((byte) data);
+		disguise.block = material;
 		return disguise;
 	}
 

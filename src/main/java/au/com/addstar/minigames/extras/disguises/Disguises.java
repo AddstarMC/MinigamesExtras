@@ -7,7 +7,7 @@ import org.bukkit.plugin.Plugin;
 public final class Disguises {
 
     public static void initialize(Minigames minigames, Plugin thisPlugin) {
-		minigames.getMinigameData().addModule(DisguisesModule.class);
+		minigames.getMinigameManager().addModule(DisguisesModule.class);
 		LoadoutModule.registerAddon(thisPlugin, new DisguiseAddon());
 	}
 }

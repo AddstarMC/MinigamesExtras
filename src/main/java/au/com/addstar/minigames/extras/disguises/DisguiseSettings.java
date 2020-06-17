@@ -1,7 +1,7 @@
 package au.com.addstar.minigames.extras.disguises;
 
 import au.com.addstar.minigames.extras.BasicFlag;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.config.BooleanFlag;
 import au.com.mineauz.minigames.config.EnumFlag;
 import au.com.mineauz.minigames.menu.Callback;
@@ -172,8 +172,7 @@ class DisguiseSettings {
 	}
 	
 	private void showDisguiseName(Player player, Disguise disguise, boolean show) {
-		disguise.setShowName(show);
-		
+		disguise.setDynamicName(show);
 		if (show) {
             if (disguise.getWatcher() instanceof LivingWatcher) {
                 disguise.getWatcher().setCustomName(player.getDisplayName());

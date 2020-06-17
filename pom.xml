@@ -8,7 +8,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <build.number />
         <plugin.version>${project.version}-${build.number}</plugin.version>
-        <spigot.version>1.12.2-R0.1-SNAPSHOT</spigot.version>
+		<spigot.api.version>1.15</spigot.api.version>
+		<minigames.version>1.15-SNAPSHOT</minigames.version>
+        <spigot.version>1.15.2-R0.1-SNAPSHOT</spigot.version>
     </properties>
 	<repositories>
 		<!-- For spigot-api -->
@@ -46,6 +48,10 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>codemc-repo</id>
+			<url>https://repo.codemc.org/repository/maven-public/</url>
+		</repository>
 		<!-- For ProtocolLib -->
 		<repository>
 			<id>ProtcolLib Repo</id>
@@ -67,28 +73,28 @@
 		<dependency>
 			<groupId>au.com.mineauz</groupId>
 			<artifactId>Minigames</artifactId>
-			<version>1.12.2-RC</version>
+			<version>${minigames.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>au.com.mineauz</groupId>
 			<artifactId>Minigames-Regions</artifactId>
-            <version>1.12.2-SNAPSHOT</version>
+			<version>${minigames.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>au.com.addstar</groupId>
 			<artifactId>Monolith</artifactId>
-			<version>1.4.8-SNAPSHOT</version>
+			<version>1.6.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>LibsDisguises</groupId>
 			<artifactId>LibsDisguises</artifactId>
-			<version>9.5.1-SNAPSHOT</version>
+			<version>10.0.12-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -114,7 +120,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
-				
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

@@ -1,6 +1,6 @@
 package au.com.addstar.minigames.extras.visibility;
 
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.events.JoinMinigameEvent;
 import au.com.mineauz.minigames.events.QuitMinigameEvent;
 import au.com.mineauz.minigames.gametypes.MinigameType;

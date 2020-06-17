@@ -212,7 +212,8 @@ public class EffectModule extends MinigameModule {
 
 	@Override
 	public void addEditMenuOptions(Menu editMenu) {
-		editMenu.addItem(new MenuItem("Effects", Material.FIREWORK_CHARGE) {
+		editMenu.addItem(new MenuItem("Effects", Material.FIRE_CHARGE) {
+
 			@Override
 			public ItemStack onClick() {
 				displayMenu(getContainer());

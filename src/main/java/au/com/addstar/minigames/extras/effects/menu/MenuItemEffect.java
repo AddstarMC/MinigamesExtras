@@ -4,11 +4,11 @@ import au.com.addstar.minigames.extras.effects.EffectMenus;
 import au.com.addstar.minigames.extras.effects.EffectModule;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.mineauz.minigames.MinigameMessageType;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.MinigameUtils;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +21,7 @@ public class MenuItemEffect extends MenuItem {
 	private final EffectModule module;
 	
 	public MenuItemEffect(String name, BaseEffect effect, EffectModule module) {
-		super(WordUtils.capitalizeFully(name), Material.FIREWORK_CHARGE);
+		super(StringUtils.capitalize(name), Material.FIRE_CHARGE);
 		
 		this.name = name;
 		this.effect = effect;
@@ -35,7 +35,7 @@ public class MenuItemEffect extends MenuItem {
 		ItemStack item = getItem();
 		ItemMeta meta = item.getItemMeta();
 		
-		meta.setDisplayName(ChatColor.RESET + WordUtils.capitalizeFully(name));
+		meta.setDisplayName(ChatColor.RESET + StringUtils.capitalize(name));
 		
 		item.setItemMeta(meta);
 		setItem(item);

@@ -7,7 +7,7 @@ import au.com.addstar.monolith.attachments.AttachmentFunctions;
 import au.com.addstar.monolith.attachments.EntityAttachment;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.emitters.Emitter;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.MinigameUtils;
 import au.com.mineauz.minigames.menu.*;
 import au.com.mineauz.minigamesregions.Node;
@@ -137,7 +137,7 @@ public class AttachEffectAction extends AbstractAction {
 	public boolean displayMenu(final MinigamePlayer player, Menu previous) {
 		final Menu menu = new Menu(6, "Attach Effect", player);
 		
-		menu.addItem(new MenuItem("Emitter", Material.CAULDRON_ITEM) {
+		menu.addItem(new MenuItem("Emitter", Material.CAULDRON) {
 			@Override
 			public ItemStack onClick() {
 				template.displayMenu(player, menu);
@@ -158,7 +158,7 @@ public class AttachEffectAction extends AbstractAction {
 		}));
 		
 		menu.addItem(new MenuItemNewLine());
-		menu.addItem(new MenuItemVector("Attachment Offset", Material.DIODE, attachmentOffset, 0.1f));
+		menu.addItem(new MenuItemVector("Attachment Offset", Material.COMPARATOR, attachmentOffset, 0.1f));
 		menu.addItem(new MenuItemBoolean("Relative to entity look", Material.LEVER, new Callback<Boolean>() {
 			@Override
 			public void setValue(Boolean value) {

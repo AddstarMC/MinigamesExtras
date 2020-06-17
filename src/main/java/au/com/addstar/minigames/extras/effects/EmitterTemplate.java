@@ -10,7 +10,7 @@ import au.com.addstar.monolith.attachments.Attachment;
 import au.com.addstar.monolith.effects.emitters.ContinuousEmitter;
 import au.com.addstar.monolith.effects.emitters.Emitter;
 import au.com.addstar.monolith.effects.emitters.OneShotEmitter;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.MinigameUtils;
 import au.com.mineauz.minigames.menu.Callback;
 import au.com.mineauz.minigames.menu.Menu;
@@ -112,7 +112,7 @@ public class EmitterTemplate {
 			}
 		}, Type.class));
 		
-		menu.addItem(new MenuItemString("Effect", Material.FIREWORK_CHARGE, new Callback<String>() {
+		menu.addItem(new MenuItemString("Effect", Material.FIREWORK_STAR, new Callback<String>() {
 			@Override
 			public String getValue() {
 				return effectType;
@@ -138,7 +138,7 @@ public class EmitterTemplate {
 //		}));
 		
 		menu.addItem(new MenuItemNewLine());
-		menu.addItem(new MenuItemInteger("Delay", MinigameUtils.stringToList("The number of ticks;until the first emission;Continuous Emitter Only"), Material.WATCH, new Callback<Integer>() {
+		menu.addItem(new MenuItemInteger("Delay", MinigameUtils.stringToList("The number of ticks;until the first emission;Continuous Emitter Only"), Material.CLOCK, new Callback<Integer>() {
 			@Override
 			public void setValue(Integer value) {
 				delay = value;
@@ -150,7 +150,7 @@ public class EmitterTemplate {
 			}
 		}, 0, null));
 		
-		menu.addItem(new MenuItemInteger("Interval", MinigameUtils.stringToList("The number of ticks;between emissions;Continuous Emitter Only"), Material.WATCH, new Callback<Integer>() {
+		menu.addItem(new MenuItemInteger("Interval", MinigameUtils.stringToList("The number of ticks;between emissions;Continuous Emitter Only"), Material.CLOCK, new Callback<Integer>() {
 			@Override
 			public void setValue(Integer value) {
 				interval = value;

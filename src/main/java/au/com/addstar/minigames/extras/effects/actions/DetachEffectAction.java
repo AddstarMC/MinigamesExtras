@@ -1,7 +1,7 @@
 package au.com.addstar.minigames.extras.effects.actions;
 
 import au.com.addstar.minigames.extras.effects.EffectModule;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigamesregions.Node;
 import au.com.mineauz.minigamesregions.Region;

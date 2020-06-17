@@ -2,10 +2,10 @@ package au.com.addstar.minigames.extras.effects.menu;
 
 import au.com.addstar.minigames.extras.effects.EffectMenus;
 import au.com.addstar.minigames.extras.effects.EffectModule;
+import au.com.addstar.minigames.extras.effects.EffectParticle;
 import au.com.addstar.monolith.effects.BaseEffect;
-import au.com.addstar.monolith.effects.EffectParticle;
 import au.com.mineauz.minigames.MinigameMessageType;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.menu.Menu;
 import au.com.mineauz.minigames.menu.MenuItem;
 import au.com.mineauz.minigames.menu.MenuItemBack;
@@ -49,7 +49,7 @@ public class MenuItemAddEffect extends MenuItem {
 	private void showTypeSelect() {
 		Menu menu = new Menu(6, "Select Effect Type", getContainer().getViewer());
 		
-		menu.addItem(new MenuItem("Particle Effect", Material.FIREWORK_CHARGE) {
+		menu.addItem(new MenuItem("Particle Effect", Material.FIRE_CHARGE) {
 			@Override
 			public ItemStack onClick() {
 				showEditMenu(getContainer(), new EffectParticle());

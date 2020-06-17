@@ -4,7 +4,6 @@ import au.com.addstar.minigames.extras.effects.menu.MenuItemColor;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemParticleType;
 import au.com.addstar.minigames.extras.effects.menu.MenuItemVector;
 import au.com.addstar.monolith.effects.BaseEffect;
-import au.com.addstar.monolith.effects.EffectParticle;
 import au.com.mineauz.minigames.menu.*;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Color;
@@ -28,7 +27,7 @@ public final class EffectMenus {
 		// Set the type
 		menu.addItem(new MenuItemParticleType("Set Type", Material.PAPER, effect));
 		
-		menu.addItem(new MenuItemVector("Range", Material.FENCE, effect.getRange(), 0.1f));
+		menu.addItem(new MenuItemVector("Range", Material.OAK_FENCE, effect.getRange(), 0.1f));
 		menu.addItem(new MenuItemDecimal("Speed", Material.MINECART, new Callback<Double>() {
 			@Override
 			public void setValue(Double value) {
@@ -53,7 +52,7 @@ public final class EffectMenus {
 			}
 		}, 1, null));
 		
-		menu.addItem(new MenuItemColor("Particle Color", Material.INK_SACK, new Callback<Color>() {
+		menu.addItem(new MenuItemColor("Particle Color", Material.INK_SAC, new Callback<Color>() {
 			@Override
 			public void setValue(Color value) {
 				effect.setColour(value);
@@ -73,7 +72,7 @@ public final class EffectMenus {
 		Menu menu = new Menu(6, "Select Effect", parent.getViewer());
 		
 		for (final String key : module.getEffects().keySet()) {
-			menu.addItem(new MenuItem(WordUtils.capitalizeFully(key), Material.FIREWORK_CHARGE) {
+			menu.addItem(new MenuItem(WordUtils.capitalizeFully(key), Material.FIRE_CHARGE) {
 				@Override
 				public ItemStack onClick() {
 					callback.setValue(key);

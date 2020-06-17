@@ -6,7 +6,7 @@ import au.com.addstar.monolith.attachments.Attachment;
 import au.com.addstar.monolith.attachments.StaticAttachment;
 import au.com.addstar.monolith.effects.BaseEffect;
 import au.com.addstar.monolith.effects.emitters.Emitter;
-import au.com.mineauz.minigames.MinigamePlayer;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import au.com.mineauz.minigames.MinigameUtils;
 import au.com.mineauz.minigames.menu.*;
 import au.com.mineauz.minigamesregions.Node;
@@ -113,7 +113,7 @@ public class PlayEffectAction extends AbstractAction {
 	public boolean displayMenu(final MinigamePlayer player, final Menu previous) {
 		final Menu menu = new Menu(6, "Play Effect", player);
 		
-		menu.addItem(new MenuItem("Emitter", Material.CAULDRON_ITEM) {
+		menu.addItem(new MenuItem("Emitter", Material.CAULDRON) {
 			@Override
 			public ItemStack onClick() {
 				template.displayMenu(player, menu);

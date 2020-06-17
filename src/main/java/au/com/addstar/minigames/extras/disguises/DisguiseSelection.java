@@ -2,15 +2,12 @@ package au.com.addstar.minigames.extras.disguises;
 
 import au.com.addstar.minigames.extras.MenuItemEnum;
 import au.com.addstar.minigames.extras.disguises.DisguiseSettings.ShowSetting;
-import au.com.mineauz.minigames.MinigamePlayer;
 import au.com.mineauz.minigames.menu.*;
+import au.com.mineauz.minigames.objects.MinigamePlayer;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SpawnEggMeta;
-import org.bukkit.material.MaterialData;
 
 public class DisguiseSelection {
 	public static Menu createDisguiseSelectMenu(final Menu previous, final MinigamePlayer viewer, final Callback<StoredDisguise> callback) {
@@ -21,15 +18,15 @@ public class DisguiseSelection {
 			@Override
 			public ItemStack onClickWithItem(ItemStack item) {
 				if (item.getType().isBlock()) {
-					callback.setValue(StoredDisguise.blockDisguise(item.getType(), item.getDurability()));
+					callback.setValue(StoredDisguise.blockDisguise(item.getType()));
 					previous.displayMenu(viewer);
 				}
 				
 				return super.onClickWithItem(item);
 			}
 		});
-		menu.addItem(new MenuItemPage("Creatures", Material.MONSTER_EGG, createEntitiesMenu(menu, previous, viewer, callback)));
-		menu.addItem(new MenuItemPage("Misc", Material.MONSTER_EGG, createMiscMenu(menu, previous, viewer, callback)));
+		menu.addItem(new MenuItemPage("Creatures", Material.CHICKEN_SPAWN_EGG, createEntitiesMenu(menu, previous, viewer, callback)));
+		menu.addItem(new MenuItemPage("Misc", Material.CREEPER_SPAWN_EGG, createMiscMenu(menu, previous, viewer, callback)));
 		
 		menu.addItem(new MenuItemBack(previous), menu.getSize()-9);
 		
@@ -75,7 +72,6 @@ public class DisguiseSelection {
 	private static ItemStack getDisplayItem(DisguiseType type) {
 		Material itemType;
         ItemStack item;
-		int data = 0;
 		switch (type) {
 		case ARMOR_STAND:
 			itemType = Material.ARMOR_STAND;
@@ -84,7 +80,7 @@ public class DisguiseSelection {
 			itemType = Material.ARROW;
 			break;
 		case BOAT:
-			itemType = Material.BOAT;
+			itemType = Material.OAK_BOAT;
 			break;
 		case EGG:
 			itemType = Material.EGG;
@@ -93,21 +89,21 @@ public class DisguiseSelection {
 			itemType = Material.ENDER_PEARL;
 			break;
 		case ENDER_SIGNAL:
-			itemType = Material.EYE_OF_ENDER;
+			itemType = Material.ENDER_EYE;
 			break;
 		case EXPERIENCE_ORB:
 		case THROWN_EXP_BOTTLE:
-			itemType = Material.EXP_BOTTLE;
+			itemType = Material.EXPERIENCE_BOTTLE;
 			break;
 		case FALLING_BLOCK:
 			itemType = Material.STONE;
 			break;
 		case FIREBALL:
 		case SMALL_FIREBALL:
-			itemType = Material.FIREBALL;
+			itemType = Material.FIRE_CHARGE;
 			break;
 		case FIREWORK:
-			itemType = Material.FIREWORK;
+			itemType = Material.FIREWORK_ROCKET;
 			break;
 		case ITEM_FRAME:
 			itemType = Material.ITEM_FRAME;
@@ -116,19 +112,19 @@ public class DisguiseSelection {
 			itemType = Material.MINECART;
 			break;
 		case MINECART_CHEST:
-			itemType = Material.STORAGE_MINECART;
+			itemType = Material.CHEST_MINECART;
 			break;
 		case MINECART_COMMAND:
-			itemType = Material.COMMAND_MINECART;
+			itemType = Material.COMMAND_BLOCK_MINECART;
 			break;
 		case MINECART_FURNACE:
-			itemType = Material.POWERED_MINECART;
+			itemType = Material.FURNACE_MINECART;
 			break;
 		case MINECART_HOPPER:
 			itemType = Material.HOPPER_MINECART;
 			break;
 		case MINECART_TNT:
-			itemType = Material.EXPLOSIVE_MINECART;
+			itemType = Material.TNT_MINECART;
 			break;
 		case MINECART_MOB_SPAWNER:
 			itemType = Material.MINECART;
@@ -137,7 +133,7 @@ public class DisguiseSelection {
 			itemType = Material.FISHING_ROD;
 			break;
 		case LEASH_HITCH:
-			itemType = Material.LEASH;
+			itemType = Material.LEAD;
 			break;
 		case PAINTING:
 			itemType = Material.PAINTING;
@@ -146,7 +142,7 @@ public class DisguiseSelection {
 			itemType = Material.TNT;
 			break;
 		case SNOWBALL:
-			itemType = Material.SNOW_BALL;
+			itemType = Material.SNOWBALL;
 			break;
 		case SPLASH_POTION:
 			itemType = Material.POTION;
@@ -166,7 +162,7 @@ public class DisguiseSelection {
 			itemType = Material.LEATHER;
 			break;
 		case CREEPER:
-			itemType = Material.SULPHUR;
+			itemType = Material.GUNPOWDER;
 			break;
 		case ELDER_GUARDIAN:
 		case GUARDIAN:
@@ -182,7 +178,7 @@ public class DisguiseSelection {
 			itemType = Material.GHAST_TEAR;
 			break;
 		case HORSE:
-			itemType = Material.IRON_BARDING;
+			itemType = Material.IRON_HORSE_ARMOR;
 			break;
 		case IRON_GOLEM:
 			itemType = Material.IRON_INGOT;
@@ -191,13 +187,13 @@ public class DisguiseSelection {
 			itemType = Material.MAGMA_CREAM;
 			break;
 		case MUSHROOM_COW:
-			itemType = Material.MUSHROOM_SOUP;
+			itemType = Material.MUSHROOM_STEW;
 			break;
 		case OCELOT:
-			itemType = Material.RAW_FISH;
+			itemType = Material.SALMON;
 			break;
 		case PIG:
-			itemType = Material.PORK;
+			itemType = Material.PORKCHOP;
 			break;
 		case PIG_ZOMBIE:
 			itemType = Material.GOLD_NUGGET;
@@ -206,7 +202,7 @@ public class DisguiseSelection {
 			itemType = Material.RABBIT_FOOT;
 			break;
 		case SHEEP:
-			itemType = Material.WOOL;
+			itemType = Material.WHITE_WOOL;
 			break;
 		case SKELETON:
 			itemType = Material.BONE;
@@ -215,7 +211,7 @@ public class DisguiseSelection {
 			itemType = Material.SLIME_BALL;
 			break;
 		case SQUID:
-			itemType = Material.INK_SACK;
+			itemType = Material.INK_SAC;
 			break;
 		case VILLAGER:
 			itemType = Material.EMERALD;
@@ -224,30 +220,27 @@ public class DisguiseSelection {
 			itemType = Material.POTION;
 			break;
 		case WITHER:
-			itemType = Material.SKULL_ITEM;
-            data = SkullType.WITHER.ordinal();
+			itemType = Material.WITHER_SKELETON_SKULL;
 			break;
 		case ZOMBIE:
 			itemType = Material.ROTTEN_FLESH;
 			break;
 		case PLAYER:
-			itemType = Material.SKULL_ITEM;
-			data = 3;
+			itemType = Material.PLAYER_HEAD;
 			break;
 		default:
 			if (type.isMob()) {
 				// entity ids can actually go higher than this :/
-				itemType = Material.MONSTER_EGG;
+				String name = type.getEntityClass().getSimpleName();
+				itemType = Material.matchMaterial(name + "_SPAWN_EGG");
+				if (itemType == null) {
+					itemType = Material.CHICKEN_SPAWN_EGG;
+				}
 			}
 			else
 				itemType = Material.BARRIER;
 		}
-        MaterialData mdata = new MaterialData(itemType, (byte) data);
-        item = mdata.toItemStack(1);
-        if (itemType == Material.MONSTER_EGG) {
-            SpawnEggMeta meta = (SpawnEggMeta) item.getItemMeta();
-            meta.setSpawnedType(type.getEntityType());
-        }
+        item = new ItemStack(itemType,1);
         return item;
 	}
 	
@@ -259,7 +252,7 @@ public class DisguiseSelection {
 		Menu subMenu = new Menu(6, "Disguise Settings", player);
 		
 		subMenu.addItem(new MenuItemEnum<>("Disguise To Self", Material.ARMOR_STAND, settings.getShowDisguiseSelfCallback(), ShowSetting.class));
-		subMenu.addItem(new MenuItemEnum<>("Disguise to Team", Material.BREWING_STAND_ITEM,settings.getShowDisguiseTeamCallback(),ShowSetting.class));
+		subMenu.addItem(new MenuItemEnum<>("Disguise to Team", Material.BREWING_STAND,settings.getShowDisguiseTeamCallback(),ShowSetting.class));
 		subMenu.addItem(new MenuItemBoolean("Show Player Name", Material.LEVER, settings.getShowPlayerNameCallback()));
 		
 		subMenu.addItem(new MenuItemNewLine());
@@ -277,7 +270,7 @@ public class DisguiseSelection {
 		private final Menu parent;
 		
 		public MenuItemDisguise(DisguiseType type, Menu parent, Callback<StoredDisguise> callback) {
-			super(getDisguiseName(type), Material.WOOD);
+			super(getDisguiseName(type), Material.OAK_WOOD);
 			this.type = type;
 			this.parent = parent;
 			this.callback = callback;
